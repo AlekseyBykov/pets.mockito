@@ -15,7 +15,7 @@ public class WhitePaperService {
 
 	public List<String> filterWhitePapers(String whitePaperName) {
 		List<String> filteredWhitePapers = new ArrayList<>();
-		List<String> allWhitePapers = documentService.retrieveDocuments(whitePaperName);
+		List<String> allWhitePapers = documentService.searchDocuments(whitePaperName);
 		for (String whitePaper : allWhitePapers) {
 			if (whitePaper.contains(whitePaperName)) {
 				filteredWhitePapers.add(whitePaper);

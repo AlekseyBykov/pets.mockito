@@ -65,7 +65,9 @@ public class CoreMockitoTest {
 	public void testGetCallWithExceptionThrowing() {
 		List<Integer> list = mockList();
 
-		when(list.get(Mockito.anyInt())).thenThrow(new RuntimeException());
+		when(list.size()).thenThrow(new RuntimeException());
+
+		assertEquals(0, list.size());
 	}
 
 	@SuppressWarnings("unchecked")

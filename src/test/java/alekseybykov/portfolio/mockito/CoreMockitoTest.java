@@ -6,14 +6,17 @@ import org.mockito.Mockito;
 
 import java.util.*;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CoreMockitoTest {
 
 	@Test
-	public void testMockSizeCall() {
+	public void testSizeCallUsingMock() {
 		List<Integer> list = mockList();
 		when(list.size()).thenReturn(1);
 
@@ -21,7 +24,7 @@ public class CoreMockitoTest {
 	}
 
 	@Test
-	public void testMockGetCall() {
+	public void testGetCallUsingMock() {
 		List<Integer> list = mockList();
 		when(list.get(0)).thenReturn(NumberUtils.INTEGER_ONE);
 
@@ -29,7 +32,7 @@ public class CoreMockitoTest {
 	}
 
 	@Test
-	public void testMockGetByAnyIdxCall() {
+	public void testGetByAnyIdxCallUsingMock() {
 		List<Integer> list = mockList();
 		Mockito.when(list.get(Mockito.anyInt())).thenReturn(NumberUtils.INTEGER_ZERO);
 
@@ -39,13 +42,30 @@ public class CoreMockitoTest {
 	}
 
 	@Test
-	public void testMockThreeGetCalls() {
+	public void testThreeGetCallsUsingMock() {
 		List<Integer> list = mockList();
 		when(list.size()).thenReturn(-1).thenReturn(0).thenReturn(1);
 
 		assertEquals(-1, list.size());
 		assertEquals(0, list.size());
 		assertEquals(1, list.size());
+	}
+
+	@Test
+	public void testGetCallWithUsingBddStyle() {
+		List<Integer> list = mockList();
+
+		given(list.get(Mockito.anyInt())).willReturn(NumberUtils.INTEGER_ZERO);
+
+		assertThat(NumberUtils.INTEGER_ZERO, is(list.get(0)));
+		assertThat(NumberUtils.INTEGER_ZERO, is(list.get(1)));
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void testGetCallWithExceptionThrowing() {
+		List<Integer> list = mockList();
+
+		when(list.get(Mockito.anyInt())).thenThrow(new RuntimeException());
 	}
 
 	@SuppressWarnings("unchecked")

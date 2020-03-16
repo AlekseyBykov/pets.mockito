@@ -7,5 +7,7 @@ public interface DocumentService {
 
 	public List<String> searchDocuments(String documentName);
 
-	void deleteDocument(String documentName);
+	public void deleteDocument(String documentName);
+
+	public void deleteDocuments(List<String> documentNames);
 }

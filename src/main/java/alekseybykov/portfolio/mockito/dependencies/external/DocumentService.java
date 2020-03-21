@@ -5,9 +5,9 @@ import java.util.List;
 // Some external dependency without implementation.
 public interface DocumentService {
 
-	public List<String> searchDocuments(String documentName);
+	public List<String> searchDocumentsByName(String documentName);
 
-	public void deleteDocument(String documentName);
+	public void deleteDocumentByName(String documentName);
 
 	public void deleteDocuments(List<String> documentNames);
 }

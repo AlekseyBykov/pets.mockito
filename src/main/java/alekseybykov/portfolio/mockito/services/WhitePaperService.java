@@ -16,12 +16,21 @@ public class WhitePaperService {
 
 	public List<String> filterWhitePapers(String whitePaperName) {
 		List<String> filteredWhitePapers = new ArrayList<>();
-		List<String> allWhitePapers = documentService.searchDocuments(whitePaperName);
+		List<String> allWhitePapers = documentService.searchDocumentsByName(whitePaperName);
 		for (String whitePaper : allWhitePapers) {
 			if (StringUtils.containsIgnoreCase(whitePaper, whitePaperName)) {
 				filteredWhitePapers.add(whitePaper);
 			}
 		}
 		return filteredWhitePapers;
+	}
+
+	public void deleteWhitePapers(String whitePaperName) {
+		List<String> allWhitePapers = documentService.searchDocumentsByName(whitePaperName);
+		for (String whitePaper : allWhitePapers) {
+			if (StringUtils.containsIgnoreCase(whitePaper, whitePaperName)) {
+				documentService.deleteDocumentByName(whitePaper);
+			}
+		}
 	}
 }

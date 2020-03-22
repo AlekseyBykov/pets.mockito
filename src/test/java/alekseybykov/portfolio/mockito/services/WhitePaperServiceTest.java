@@ -1,6 +1,7 @@
 package alekseybykov.portfolio.mockito.services;
 
 import alekseybykov.portfolio.mockito.dependencies.external.DocumentService;
+import alekseybykov.portfolio.mockito.utils.Marker;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,7 +10,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +31,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+/*@RunWith(MockitoJUnitRunner.class)*/
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Marker.class})
 public class WhitePaperServiceTest {
 
 	@Mock
@@ -115,5 +120,21 @@ public class WhitePaperServiceTest {
 
 		//then
 		assertThat(whitePapers.size(), is(1));
+	}
+
+	@Test
+	public void testMarkWhitePaper() {
+		String whitePaperName = "Document2";
+		assertEquals(whitePaperService.markWhitePaper(whitePaperName), "Document2#MARKED");
+
+		PowerMockito.mockStatic(Marker.class);
+		when(Marker.getMark()).thenReturn("MOCKED");
+
+		assertEquals(whitePaperService.markWhitePaper(whitePaperName), "Document2#MOCKED");
+
+		// Checking that this method was called
+		PowerMockito.verifyStatic();
+		Marker.getMark();
+		PowerMockito.verifyStatic(times(1));
 	}
 }

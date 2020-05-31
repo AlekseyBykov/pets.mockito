@@ -31,6 +31,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Aleksey Bykov
+ * @since 15.03.2020
+ */
 /*@RunWith(MockitoJUnitRunner.class)*/
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Marker.class})

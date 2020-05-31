@@ -9,6 +9,10 @@ import java.util.List;
 
 import static java.lang.String.format;
 
+/**
+ * @author Aleksey Bykov
+ * @since 15.03.2020
+ */
 public class WhitePaperService {
 
 	public WhitePaperService(DocumentService documentService) {

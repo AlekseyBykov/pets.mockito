@@ -13,6 +13,10 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Aleksey Bykov
+ * @since 14.03.2020
+ */
 public class CoreMockitoTest {
 
 	@Test
